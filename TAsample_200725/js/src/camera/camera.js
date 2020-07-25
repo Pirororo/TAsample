@@ -13,14 +13,14 @@ export class Camera extends THREE.PerspectiveCamera{
 
     this.randomInt = this.randomInt.bind(this);
 
-    this.nowCamPos = new THREE.Vector3(20, 30, 60);
+    this.nowCamPos = new THREE.Vector3(20, 90, 60);
     this.position.set(this.nowCamPos.x, this.nowCamPos.y, this.nowCamPos.z);
     this.nowCamLook = new THREE.Vector3(0, 0, 0);
     this.lookAt(this.nowCamLook.x, this.nowCamLook.y, this.nowCamLook.z);
     this.targetCamPos = new THREE.Vector3(
-      this.randomInt(-100, 200),
-      this.randomInt(-100, 200),
-      this.randomInt(-100, 200)
+      this.randomInt(-100, 300),
+      this.randomInt(-100, 300),
+      this.randomInt(-100, 300)
     );
     this.targetCamLook = new THREE.Vector3(
       0,0,0
