@@ -66,7 +66,6 @@ export class App{
 
         this.updateEffectBloom = function () {
             bloomPass.strength = controls.strength, 
-            console.log(bloomPass.strength);
             bloomPass.kernelSize = controls.kernelSize, 
             bloomPass.sigma = controls.sigma,
             bloomPass.resolution = controls.resolution

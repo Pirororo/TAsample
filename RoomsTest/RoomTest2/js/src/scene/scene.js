@@ -33,9 +33,7 @@ export class Scene extends THREE.Scene {
             this.boxColor.setHSL(this.hue, 0.8, 0.6);
             const material = new THREE.MeshBasicMaterial({
                 color: this.boxColor,
-                wireframe: true,
-                opacity: 0.95,
-                transparent: true,
+                wireframe: true
             });
 
             this.box = new THREE.Mesh(this.geometry, material);
@@ -43,6 +41,7 @@ export class Scene extends THREE.Scene {
             this.box.rotation.x = 90 * Math.PI / 180;
             this.boxGroup.add(this.box);
 
+            // 個々のmeshをリスト化して保存
             this.boxList.push(this.box);
 
             // 現在のpositions
