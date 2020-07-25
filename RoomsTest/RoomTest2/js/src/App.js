@@ -13,38 +13,9 @@ export class App{
     //この中からconstructer外部のmethodを呼び出すためにはbindする必要がある
     this._update = this._update.bind(this);
     this._resize = this._resize.bind(this);
-    this._initStats = this._initStats.bind(this);
-
-    //fps表示
-    this._stats = this._initStats();
 
     // シーン
     this._scene = sceneInstance;
-
-    //カメラ
-    this.orbitControls = new THREE.OrbitControls(this._scene.camera);
-    this.orbitControls.autoRotate = false;
-    // this.orbitControls.enableDamping = true;
-    // this.orbitControls.dampingFactor = 0.2;
-    // this.clock = new THREE.Clock();
-
-
-    //Tween
-    this.camPos = {x: 215, y: 315, z: -105};
-    this._scene.camera.position.set(this.camPos.x,this.camPos.y,this.camPos.z);
-    // var rndPos = (2*Math.random()-1)*100;//-100~100
-    // this.camTarget= {x:rndPos, y:rndPos, z:rndPos};
-    this.camTarget= {x:50, y:20, z:-100};
-
-    this.tween = new TWEEN.Tween(this.camPos).to(this.camTarget, 1000).easing(TWEEN.Easing.Elastic.InOut).onUpdate(function(){
-      console.log('update!!!!!!!!!');
-
-      // this._scene.camera.position.x = this.camPos.x;
-      // this._scene.camera.position.y = this.camPos.y;
-      // this._scene.camera.position.z = this.camPos.z;
-    }).delay(1500).start();//tween.start();も省略されてる
-
-
 
     //レンダラー
     this._renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
@@ -54,7 +25,6 @@ export class App{
 
     // DOMを追加
     this._wrapper = document.getElementById('WebGL-output').appendChild(this._renderer.domElement);
-
 
     // リサイズ
     this._resize();
@@ -114,11 +84,7 @@ export class App{
     // フレーム毎の更新
     this._update();
 
-    // this.camSwitch = "mainCam";
-
   }
-
-
 
 
   /**
@@ -126,30 +92,14 @@ export class App{
   */
   _update() {
 
-    this._stats.update();
-    // TWEEN.update();
-
-    // var delta = this.clock.getDelta();
-    // this.orbitControls.update(delta);
-
     this._renderer.autoClear = false;//これ大事〜！trueだと色が毎回背景白にクリアされちゃう
 
     // シーンの更新
     this._scene.update();
+    this._scene.draw();
 
     requestAnimationFrame(this._update);
     this.composer.render();
-    // this.composer.render(delta);
-  
-
-    // // カメラを切り替え
-    // if(this.camSwitch == "mainCam"){
-    //   this._renderer.render(this._scene, this._scene.camera);
-    // }else if(this.camSwitch == "roomCam"){
-    //   this._renderer.render(this._scene, this._scene.roomCamera);
-    // }else if(this.camSwitch == "moveCam"){
-    //   this._renderer.render(this._scene, this._scene.moveCamera);
-    // }
 
   }
 
@@ -166,19 +116,5 @@ export class App{
     this._scene.camera.aspect = width / height;
     this._scene.camera.updateProjectionMatrix();
   }
-
-  _initStats() {
-
-    this._stats = new Stats();
-    this._stats.setMode(0); // 0: fps, 1: ms
-
-    this._stats.domElement.style.position = 'absolute';
-    this._stats.domElement.style.left = '0px';
-    this._stats.domElement.style.top = '0px';
-
-    document.getElementById("Stats-output").appendChild(this._stats.domElement);
-
-    return this._stats;
-}
 
 }

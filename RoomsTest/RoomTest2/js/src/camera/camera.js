@@ -24,9 +24,6 @@ export class Camera extends THREE.PerspectiveCamera{
     );
     this.targetCamLook = new THREE.Vector3(
       0,0,0
-      // (2*Math.random()-1)*50,
-      // (2*Math.random()-1)*50,
-      // (2*Math.random()-1)*50
     );
 
 
@@ -69,15 +66,11 @@ export class Camera extends THREE.PerspectiveCamera{
       );
 
       this.targetCamLook = new THREE.Vector3(
-        0,0,0
-        // (2*Math.random()-1)*50,
-        // (2*Math.random()-1)*50,
-        // (2*Math.random()-1)*50
+        this.randomInt(0, 70),
+        this.randomInt(0, 70),
+        this.randomInt(0, 70)
       );
 
-      // targetCamLook.set(nowBoxPos[lookBoxNUM]);
-      //   lookBoxNUM += 1;
-      //   if(lookBoxNUM > NUM){lookBoxNUM = 0;}
     }
 
     // this.camPos += (this.targetCamPos- this.nowCamPos)*0.02;//この書き方動かない！！！！！！！
@@ -87,17 +80,12 @@ export class Camera extends THREE.PerspectiveCamera{
     // this.position.set(this.nowCamPos);//この書き方動かない！！！！！！！
     this.position.set(this.nowCamPos.x,this.nowCamPos.y,this.nowCamPos.z);
 
-    console.log(new THREE.Vector3(this.targetCamPos.x, this.targetCamPos.y, this.targetCamPos.z));
-
 
     this.nowCamLook.x += (this.targetCamLook.x - this.nowCamLook.x) *0.03;
     this.nowCamLook.y += (this.targetCamLook.y - this.nowCamLook.y) *0.03;
     this.nowCamLook.z += (this.targetCamLook.z - this.nowCamLook.z) *0.03;
 
-    this.lookAt(new THREE.Vector3(this.nowCamLook.x, this.nowCamLook.y, this.nowCamLook.z));//これ大事！！！！
-
-    // console.log(new THREE.Vector3(this.targetCamLook.x, this.targetCamLook.y, this.targetCamLook.z));
-    // console.log(new THREE.Vector3(this.nowCamLook.x, this.nowCamLook.y, this.nowCamLook.z));
+    this.lookAt(new THREE.Vector3(this.nowCamLook.x, this.nowCamLook.y, this.nowCamLook.z));
   }
 
 
